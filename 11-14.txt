@@ -1,0 +1,62 @@
+for i in range(1, len(arr)):
+	for j in range(i):
+		if arr[i] > arr[j]
+
+^this structure allows for comparing next values without out of range index
+
+Find the longest increasing subsequence in an array:
+
+def longest_increasing_subsequence(arr):
+	if not arr:
+		return 0
+	cache = [1]*len(arr)
+	for i in range(1, len(arr)):
+		for j in range(i):
+			if arr[i] > arr[j]:
+				cache[i] = max(cache[i], cache[j] + 1)
+	return max(cache)
+
+Time: O(n^2)
+Space: O(n)
+
+Takeaways:
+
+The reason i starts at 1 and not 0 is simply because there is no need to mutate the 0th index of the cached array. The 0th index of the input array will always have a cached value of 1 since there are no preceding elements.
+
+Swap every two nodes in a linked list:
+
+def swap_every_two(link):
+	
+	head = link
+	curr = head
+	while curr is not None and curr.next is not None:
+		curr.value, curr.next.value = curr.next.value, curr.value
+		curr = curr.next.next
+	return head
+
+def swap_every_two_recursion(link):
+	
+	if link.next is None:
+		return
+	else:
+		link.value, link.next.value = link.next.value, link.value
+		swap_every_two_recursion(link.next.next)
+	return link
+
+Time: O(n) where n is the number of elements -- went through linked list once
+Space: O(1) mutable function -- did not add new nodes or arrays
+
+One-pass hash table find two integers in list that sum to target:
+
+def twoSum(nums, target):
+	hash = {}
+	for i, num in enumerate(nums):
+		if target-num not in hash:
+			hash[num] = i
+		else:
+			return [hash[target-num], i]
+
+Takeaway:
+
+When trying to optimize relatively simple array operations, look to use one-pass hash table.
+
