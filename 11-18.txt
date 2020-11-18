@@ -1,0 +1,87 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        if not head or not head.next:
+            return head
+        with_new_head = self.reverseList(head.next)
+        head.next.next = head
+        head.next = None
+        return with_new_head
+
+^recursive implementation for reversing linked lists (diagram image attached)
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        
+        current = head
+        prev = None
+        next_node = head
+        
+        while next_node:
+            
+            next_node = current.next
+            current.next = prev
+            prev = current
+            current = next_node
+            
+        return prev
+
+^iterative triple pointer
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def isPalindrome(self, head: ListNode) -> bool:
+        first_half = ""
+        second_half = ""
+        count = 0
+        pointer = head
+        while pointer != None:
+            count += 1
+            pointer = pointer.next
+        for _ in range(0, count//2):
+            first_half += str(head.val)
+            head = head.next
+        if count%2 !=0:
+            head = head.next
+        for _ in range(0, count//2):
+            second_half = second_half + (str(head.val)[::-1])
+            head = head.next
+        if str(first_half) == str(second_half)[::-1]:
+            return True
+        return False
+
+Palindromic linked list implementation
+
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        count = 0
+        y = x
+        while y > 0:
+            count += 1
+            y //= 10
+        if x < 0:
+            return False
+        first_half = 0
+        second_half = 0
+        for i in range(1, count//2+1):
+            first_half += first_half*10 + (x//10**(count-i))%10
+            second_half += second_half*10 + (x//10**(i-1))%10
+        if first_half == second_half:
+            return True
+        return False
+
+
+palindome without string casting
